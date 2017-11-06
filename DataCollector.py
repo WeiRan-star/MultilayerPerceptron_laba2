@@ -5,6 +5,10 @@ import numpy
 curfile = Image.open("faces/s1/1.pgm")
 
 
+X = []
+Y = []
+
+
 def getListFromPGM(pgmf):
     shit = numpy.array(pgmf)
     list2d = shit.tolist()
@@ -17,6 +21,21 @@ def getListFromPGM(pgmf):
     return(finallist)
 
 #TODO: form the X/Y teachings sets from about a 7 images for each face.
+def formFilePath(numFace, numImage):
+    return "faces/s{0}/{1}.pgm".format(numFace, numImage)
+
+
+
+def formTeachingArray():
+    global X, Y
+    for currFaceNum in range(1, 41):
+        for currImgNum in range(1, 8):
+            currPath = formFilePath(currFaceNum, currImgNum)
+            curfile = Image.open(currPath)
+            X.append(getListFromPGM(curfile))
+            Y.append(currFaceNum)
+
+
 
 # complete bullshit:
 # def read_pgm(pgmf):
