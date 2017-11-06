@@ -1,14 +1,23 @@
 #this should return X and Y teaching sets.
 from PIL import Image
 import numpy
-pil_currentfile = Image.open("faces/s1/1.pgm")
-cfile = open("faces/s1/1.pgm", 'r')
+
+curfile = Image.open("faces/s1/1.pgm")
 
 
-def read_pgm(pgmf):
-    fuck = numpy.array(pgmf)
-    print(fuck.tolist())
+def getListFromPGM(pgmf):
+    shit = numpy.array(pgmf)
+    list2d = shit.tolist()
+    finallist = []
+    for i in range(len(list2d)):
+        for j in range(len(list2d[0])):
+            finallist.append(list2d[i][j])
+    # print(list2d)
+    # print("mamku ebal")
+    # print(finallist)
+    return(finallist)
 
+#TODO: form the X/Y teachings sets from about a 7 images for each face. 
 
 # complete bullshit:
 # def read_pgm(pgmf):
