@@ -13,11 +13,10 @@ def getListFromPGM(pgmf):
         for j in range(len(list2d[0])):
             finallist.append(list2d[i][j])
     # print(list2d)
-    # print("mamku ebal")
     # print(finallist)
     return(finallist)
 
-#TODO: form the X/Y teachings sets from about a 7 images for each face. 
+#TODO: form the X/Y teachings sets from about a 7 images for each face.
 
 # complete bullshit:
 # def read_pgm(pgmf):
