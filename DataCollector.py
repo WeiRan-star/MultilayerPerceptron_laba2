@@ -2,12 +2,17 @@
 from PIL import Image
 import numpy
 
+
+_TOTAL_FACES = 41
+_TEACHING_PICS_PER_FACE = 8
+
 curfile = Image.open("faces/s1/1.pgm")
 
 
 X = []
+Xnorm = []
 Y = []
-
+Ynorm = []
 
 def getListFromPGM(pgmf):
     shit = numpy.array(pgmf)
@@ -28,13 +33,19 @@ def formFilePath(numFace, numImage):
 
 def formTeachingArray():
     global X, Y
-    for currFaceNum in range(1, 41):
-        for currImgNum in range(1, 8):
+    for currFaceNum in range(1, _TOTAL_FACES):
+        for currImgNum in range(1, _TEACHING_PICS_PER_FACE):
             currPath = formFilePath(currFaceNum, currImgNum)
             curfile = Image.open(currPath)
             X.append(getListFromPGM(curfile))
             Y.append(currFaceNum)
 
+def normalizeTeachingArray():
+    for currX in range(len(X)):
+        Xnorm.append([])
+        Ynorm.append(float(Y[currX])/255)
+        for currSubX in range(len(X[0])):
+            Xnorm[currX].append(float(X[currX][currSubX]) / 255)
 
 
 # complete bullshit:
