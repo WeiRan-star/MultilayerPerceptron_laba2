@@ -6,7 +6,7 @@ import numpy
 _TOTAL_FACES = 41
 _TEACHING_PICS_PER_FACE = 8
 
-curfile = Image.open("faces/s1/1.pgm")
+#curfile = Image.open("faces/s1/1.pgm")
 
 
 X = []
@@ -15,7 +15,8 @@ Y = []
 Ynorm = []
 
 def getListFromPGM(pgmf):
-    shit = numpy.array(pgmf)
+    currFile = Image.open(pgmf)
+    shit = numpy.array(currFile)
     list2d = shit.tolist()
     finallist = []
     for i in range(len(list2d)):
@@ -24,6 +25,21 @@ def getListFromPGM(pgmf):
     # print(list2d)
     # print(finallist)
     return(finallist)
+
+
+def normalizeList(someList):
+    resList = []
+    for currX in range(len(someList)):
+        resList.append(float(someList[currX]) / 255)
+    outerList = []
+    outerList.append(resList)
+    return outerList
+
+def getPGMAndNormalize(numF, numP):
+    fileP = formFilePath(numF, numP)
+    resulting = (normalizeList(getListFromPGM(fileP)))
+    return resulting
+
 
 #TODO: form the X/Y teachings sets from about a 7 images for each face.
 def formFilePath(numFace, numImage):
@@ -36,9 +52,10 @@ def formTeachingArray():
     for currFaceNum in range(1, _TOTAL_FACES):
         for currImgNum in range(1, _TEACHING_PICS_PER_FACE):
             currPath = formFilePath(currFaceNum, currImgNum)
-            curfile = Image.open(currPath)
-            X.append(getListFromPGM(curfile))
+            #curfile = Image.open(currPath)
+            X.append(getListFromPGM(currPath))
             Y.append(currFaceNum)
+
 
 def normalizeTeachingArray():
     for currX in range(len(X)):
