@@ -65,7 +65,17 @@ def normalizeTeachingArray():
             Xnorm[currX].append(float(X[currX][currSubX]) / 255)
 
 
-# complete bullshit:
+def glueTwoImages(f1, p1, f2, p2):
+    image1 = Image.open(formFilePath(f1, p1))
+    image2 = Image.open(formFilePath(f2, p2))
+    w = image1.width
+    h = image1.height
+    gloodImg = Image.new("L", (w*2, h))
+    gloodImg.paste(image1, (0,0))
+    gloodImg.paste(image2, (w, 0))
+    return gloodImg
+
+    # complete bullshit:
 # def read_pgm(pgmf):
 #     #Return a raster of integers from a PGM as a list of lists.
 #     assert pgmf.readline() == 'P5\n'
